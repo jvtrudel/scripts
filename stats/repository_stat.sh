@@ -25,7 +25,8 @@ for f in **/*
     fi
   done
 
-echo "# Rapport à ce jour `date +%Y-%m-%d`\n" >> $fname
+echo "# Rapport à ce jour `date +%Y-%m-%d`" >> $fname
+echo "">>$fname
 echo "| fichiers | lignes | mots |" >> $fname
 echo "|---|---|---|">>$fname
 echo "| $n_fichiers | $n_lignes | $n_mots |" >>$fname
