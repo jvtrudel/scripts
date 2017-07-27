@@ -1,0 +1,105 @@
+{{=<% %>=}}
+project(<%name%>)
+cmake_minimum_required(VERSION 3.6)
+
+if(NOT CCT_FOUND)
+    # for development purpose, you need to have cct in your project
+    # git clone git@github.com:jvtruel/cidco-cmake-tools.git
+    find_package(CCT PATHS ${CMAKE_CURRENT_SOURCE_DIR}/cidco-cmake-tools NO_DEFAULT_PATH)
+endif()
+
+
+set(<%name%>-root
+    ${CMAKE_CURRENT_LIST_DIR}/src
+    )
+
+<%#library%>
+<%#src%>
+set(<%name%>-src
+<%#files%>
+   <%.%>
+<%/files%>
+    )
+CCT_ADD_PREFIX(<%name%>-src ${<%name%>}-root})
+<%/src%>
+
+
+<%#inc%>
+set(<%name%>-inc
+<%#files%>
+   <%.%>
+<%/files%>
+    )
+CCT_ADD_PREFIX(<%name%>-inc ${<%name%>}-root})
+<%/inc%>
+
+<%#lib%>
+set(<%name%>-lib
+<%#files%>
+   <%.%>
+<%/files%>
+    )
+CCT_ADD_PREFIX(<%name%>-lib ${<%name%>}-root})
+<%/lib%>
+
+# LIBRARIE
+add_library(LIB_<%name%> ${<%name%>-src})
+<%#inc%>
+target_include_directories(
+    LIB_<%name%> PUBLIC
+    ${<%name%>-inc}
+    )
+<%/inc%>
+<%#lib%>
+target_link_libraries(LIB_<%name%>
+    ${<%name%>-lib}
+    )
+<%/lib%>
+<%/library%>
+
+
+<%#test%>
+if(build-<%name%>-test)
+    set(BUILD_<%name%>_TEST OFF CACHE BOOL "")
+
+    <%#src%>
+    set(test-<%name%>-src
+    <%#internal%>
+       <%.%>
+    <%/internal%>
+        )
+    CCT_ADD_PREFIX(test-<%name%>-src ${<%name%>}-root}/test)
+    <%/src%>
+
+
+    <%#inc%>
+    set(test-<%name%>-inc
+    <%#internal%>
+       <%.%>
+    <%/internal%>
+        )
+    CCT_ADD_PREFIX(test-<%name%>-inc ${<%name%>}-root})
+    <%/inc%>
+
+    <%#lib%>
+    set(test-<%name%>-lib
+    <%#names%>
+       <%.%>
+    <%/names%>
+        )
+    <%/lib%>
+
+    # TEST EXECUTABLE
+    add_executable(TEST-${<%name%>-name}  ${<%name%>-test-src} )
+    target_include_directories(
+        TEST-${<%name%>-name}
+        PUBLIC ${test-<%name%>-inc}
+        )
+
+    target_link_libraries(TEST-${<%name%>t-test-name}
+        ${test-<%name%>-lib}
+        LIB_<%name%>
+        )
+
+endif()
+<%/test%>

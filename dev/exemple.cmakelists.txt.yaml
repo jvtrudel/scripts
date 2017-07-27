@@ -1,0 +1,14 @@
+name: sbp-project
+library:
+    src:
+        files:
+          - test1
+          - test2
+
+test:
+    src:
+        internal:
+            - main.cpp
+    lib:
+        names:
+            - Qt5::Core
