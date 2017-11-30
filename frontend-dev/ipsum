@@ -1,0 +1,17 @@
+#!/bin/sh
+# data source: https://loripsum.net/
+
+AMOUNT=5
+
+while getopts ":n" opt; do
+  case $opt in
+    n)
+      AMOUNT=$OPTARG
+      ;;
+    *)
+      echo "Invalid option: -$OPTARG" >&2
+      ;;
+  esac
+done
+
+curl  loripsum.net/api/$AMOUNT
