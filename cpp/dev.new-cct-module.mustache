@@ -1,0 +1,44 @@
+#! /usr/bin/env bash
+
+if [ -e {{name}} ];
+ then
+   echo "Il y a déjà un répertoire à ce nom"
+   exit -1
+ fi
+
+ mkdir {{name}}
+ cd {{name}}
+ echo "# {{name}}">readme.md
+
+ mkdir test
+ touch test/main.cpp
+ mkdir src
+
+
+ echo "CMakeLists.txt.user"> .gitignore
+
+
+
+
+{{#library}}
+  {{#src}}
+     {{#modules}}
+        {{#repertoire}}
+          mkdir {{repertoire}}
+          {{#fichiers}}
+             touch {{repertoire}}/{{.}}
+          {{/fichiers}}
+        {{/repertoire}}
+        {{^repertoire}}
+        {{#fichiers}}
+           {{.}}
+        {{/fichiers}}
+        {{/repertoire}}
+     {{/modules}}
+  {{/src}}
+{{/library}}
+
+
+# git init
+# git add -A
+# git commit -m "init (using new_cct_module)"
