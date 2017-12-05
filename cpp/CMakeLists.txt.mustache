@@ -4,8 +4,8 @@ cmake_minimum_required(VERSION 3.6)
 
 if(NOT CCT_FOUND)
     # for development purpose, you need to have cct in your project
-    # git clone git@github.com:jvtruel/cidco-cmake-tools.git
-    find_package(CCT PATHS ${CMAKE_CURRENT_SOURCE_DIR}/cidco-cmake-tools NO_DEFAULT_PATH)
+    # git clone git@github.com:jvtrudel/cidco-cmake-tools.git
+    find_package(CCT PATHS ${CMAKE_CURRENT_SOURCE_DIR}/cidco-cmake-tools NO_DEFAULT_PATH REQUIRED)
 endif()
 
 
@@ -20,7 +20,7 @@ set(<%name%>-src
    <%.%>
 <%/files%>
     )
-CCT_ADD_PREFIX(<%name%>-src ${<%name%>}-root})
+CCT_ADD_PREFIX(<%name%>-src ${<%name%>-root})
 <%/src%>
 
 
@@ -30,7 +30,7 @@ set(<%name%>-inc
    <%.%>
 <%/files%>
     )
-CCT_ADD_PREFIX(<%name%>-inc ${<%name%>}-root})
+CCT_ADD_PREFIX(<%name%>-inc ${<%name%>-root})
 <%/inc%>
 
 <%#lib%>
@@ -39,7 +39,7 @@ set(<%name%>-lib
    <%.%>
 <%/files%>
     )
-CCT_ADD_PREFIX(<%name%>-lib ${<%name%>}-root})
+CCT_ADD_PREFIX(<%name%>-lib ${<%name%>-root})
 <%/lib%>
 
 # LIBRARIE
@@ -68,7 +68,7 @@ if(build-<%name%>-test)
        <%.%>
     <%/internal%>
         )
-    CCT_ADD_PREFIX(test-<%name%>-src ${<%name%>}-root}/test)
+    CCT_ADD_PREFIX(test-<%name%>-src ${<%name%>-root}/test)
     <%/src%>
 
 
@@ -78,7 +78,7 @@ if(build-<%name%>-test)
        <%.%>
     <%/internal%>
         )
-    CCT_ADD_PREFIX(test-<%name%>-inc ${<%name%>}-root})
+    CCT_ADD_PREFIX(test-<%name%>-inc ${<%name%>-root})
     <%/inc%>
 
     <%#lib%>

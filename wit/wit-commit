@@ -1,0 +1,6 @@
+#! /usr/bin/env bash
+
+# commit en ajoutant les fichiers modifiers à l'index et en commentant
+
+git commit -am "$1"
+git push 

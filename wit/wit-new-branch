@@ -1,0 +1,13 @@
+#! /usr/bin/env bash
+#
+# Crée une nouvelle branche à partir du master de l'upstream
+#
+# À faire: gestion des erreurs
+
+
+
+
+git fetch upstream
+git checkout upstream/master
+git checkout -b $1
+git push -u origin $1

@@ -1,0 +1,42 @@
+#! /usr/bin/env bash
+
+# serveur devOps pour le développement de projet java
+#
+# - rouler jenkins
+# - accéder à jenkin sur firefox via
+#    - [configuration X11 forward](https://serverfault.com/questions/601394/launch-firefox-on-remote-server-using-ssh-with-a-command-line-parameter)
+#    - [X11 Display mingw62]
+
+
+# mise à jour
+apt-get update --fix-missing
+
+# installation de firefox
+# apt install firefox
+# ... trop lourd pour le réseau
+
+# installation de midori
+wget http://midori-browser.org/downloads/midori_0.5.11-0_amd64_.deb
+dpkg -i midori_0.5.11-0_amd64_.deb
+
+# install java
+apt-get install default-jre
+apt-get install default-jdk
+# pour java 8... c'est un peu plus compliqué
+# https://linux-tips.com/t/how-to-install-java-8-on-debian-jessie/349
+echo "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" |  tee /etc/apt/sources.list.d/webupd8team-java.list
+echo "deb-src http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main" |  tee -a /etc/apt/sources.list.d/webupd8team-java.list
+
+
+# ant
+apt-get install ant
+
+#jenkins
+wget -q -O - https://pkg.jenkins.io/debian/jenkins-ci.org.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt-get update
+sudo apt-get install jenkins
+
+
+# plugins jenkins
+#
