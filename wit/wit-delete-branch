@@ -1,0 +1,14 @@
+#! /usr/bin/env bash
+
+echo "CHECKOUT"
+git checkout $1
+echo "STASH"
+git stash
+echo "CHECKOUT"
+git checkout master
+echo "DELETE LOCAL"
+git branch -D $1
+echo "DELETE REMOTE"
+git push --delete origin $1
+echo "PRUNE"
+git remote prune origin

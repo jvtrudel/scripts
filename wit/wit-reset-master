@@ -1,0 +1,22 @@
+#! /usr/bin/env bash
+
+echo "STASH"
+git stash
+
+echo "SET TO TMP-W branch"
+wit-delete-branch tmp-w
+git checkout -b tmp-w
+
+
+echo "DELETE LOCAL"
+git branch -D master
+echo "DELETE REMOTE"
+git push --delete origin master
+echo "PRUNE"
+git remote prune origin
+
+
+echo "GENERATE A FRESH MASTER"
+
+wit-new-branch master
+git branch -D tmp-w
