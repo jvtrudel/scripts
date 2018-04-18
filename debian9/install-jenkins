@@ -1,0 +1,27 @@
+#! /usr/bin/env bash
+
+# Dépendances
+
+apt update
+apt install software-properties-common
+
+## java oracle
+
+add-apt-repository "deb http://ppa.launchpad.net/webupd8team/java/ubuntu xenial main"
+apt-get update
+
+apt-get install oracle-java8-installer
+
+
+# Jenkins
+
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add -
+echo "deb http://pkg.jenkins-ci.org/debian binary/" > /etc/apt/sources.list.d/jenkins.list
+
+apt update
+apt install jenkins
+
+
+
+echo 
+echo "S'il n'y a pas eu d'erreur, le mot de passe initial est $(cat /var/lib/jenkins/secrets/initialAdminPassword)" 
