@@ -1,3 +1,10 @@
 #! /usr/bin/env bash
 
-git branch | xargs -I % wit-delete-branch %
+for i in $(git branch -r)
+do
+	echo "BRANCH $i"
+	if [[ $i = *"origin/"* ]]; then
+		echo $(echo $i |cut -d"/" -f2)
+		wit-delete-branch $(echo $i |cut -d"/" -f2)
+	fi
+done
